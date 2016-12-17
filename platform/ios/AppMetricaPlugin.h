@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
-#import <Cordova/CDVPlugin.h>
-#import "YandexMobileMetrica.h"
+#import <YandexMobileMetrica/YandexMobileMetrica.h>
+#import <Cordova/CDV.h>
 
-@interface AppMetricaPlugin : CDVPlugin <UIApplicationDelegate>
+@interface AppMetricaPlugin : CDVPlugin
 - (void)activate:(CDVInvokedUrlCommand*)command;
+- (void)reportEvent:(CDVInvokedUrlCommand*)command;
+- (void)reportEventJson:(CDVInvokedUrlCommand*)command;
 @end

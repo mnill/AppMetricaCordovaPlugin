@@ -2,16 +2,18 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.appmetrica.cordova.plugins.appmetrica"
-    version="0.0.1">
+    version="1.0.0">
     <name>AppMetrica</name>
     <description>AppMetrica cordova plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova</keywords>
     <engines>
-        <engine name="cordova" version=">=3.3.0"/>
+        <engine name="cordova" version=">=6.4.0"/>
+        <engine name="cordova-android" version=">=6.0.0"/>
+        <engine name="cordova-ios" version=">=4.3.0"/>
     </engines>
     <js-module src="www/AppMetrica.js" name="AppMetrica">
-        <clobbers target="window.plugins.appMetrica" />
+        <clobbers target="window.AppMetrica" />
     </js-module>
     <!-- android -->
     <platform name="android">
@@ -19,47 +21,16 @@
             <feature name="AppMetricaPlugin" >
                 <param name="android-package" value="com.appmetrica.cordova.plugin.AppMetricaPlugin"/>
             </feature>
+            <preference name="android-minSdkVersion" value="15" />
         </config-file>
-		
 		<config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
             <uses-permission android:name="android.permission.READ_PHONE_STATE" />
         </config-file>
-		
-		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <receiver
-				android:name="com.yandex.metrica.MetricaEventHandler"
-				android:enabled="true"
-				android:exported="true">
-            
-				<intent-filter>
-					<action android:name="com.android.vending.INSTALL_REFERRER"/>
-				</intent-filter>
-			</receiver>
-        </config-file>
-		
-		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<service
-				android:name="com.yandex.metrica.MetricaService"
-				android:enabled="true"
-				android:exported="true"
-				android:process=":Metrica">
-
-					<intent-filter>
-						<category android:name="android.intent.category.DEFAULT"/>
-						<action android:name="com.yandex.metrica.IMetricaService"/>
-						<data android:scheme="metrica"/>
-					</intent-filter>
-
-					<meta-data android:name="metrica:api:level" android:value="32"/>
-			</service>
-		</config-file>
-				
-		<source-file src="platform/android/com/appmetrica/cordova/plugin/AppMetricaPlugin.java" target-dir="src/com/appmetrica/cordova/plugin" />
-        <source-file src="platform/android/mobmetricalib-2.00.jar" target-dir="libs/"/>
+        <source-file src="platform/android/AppMetricaPlugin.java" target-dir="src/com/appmetrica/cordova/plugin" />
+        <framework src="platform/android/metrica.gradle" custom="true" type="gradleReference" />
     </platform>
-	
 	<!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
@@ -69,27 +40,7 @@
         </config-file>
 
         <header-file src="platform/ios/AppMetricaPlugin.h" />
-        <header-file src="platform/ios/YandexMobileMetrica.h" target="YandexMobileMetrica.h"/>
-		<header-file src="platform/ios/YMMVersion.h" target="YMMVersion.h"/>
-		<header-file src="platform/ios/YMMYandexMetrica.h" target="YMMYandexMetrica.h"/>
-		
         <source-file src="platform/ios/AppMetricaPlugin.m" />
-
-        <source-file src="platform/ios/libYandexMobileMetrica.a" framework="true" />
-        <source-file src="platform/ios/libFMDB.a" framework="true" />
-        <source-file src="platform/ios/libKSCrash.a" framework="true" />
-        <source-file src="platform/ios/libprotobuf-c.a" framework="true" />
-
-        <framework src="libsqlite3.dylib" />
-        <framework src="libz.dylib" />
-        <framework src="libc++.dylib" />
-        <framework src="SystemConfiguration" />
-        <framework src="UIKit" />
-        <framework src="Foundation" />
-        <framework src="CoreTelephony" />
-        <framework src="CoreLocation" />
-        <framework src="CoreGraphics" />
-        <framework src="AdSupport" />
+        <framework src="YandexMobileMetrica/Dynamic" type="podspec" spec="~> 2.6.5"/>
     </platform>
-	
 </plugin>
