@@ -1,7 +1,11 @@
 {
   "name": "AppMetricaPlugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AppMetrica cordova plugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mnill/AppMetricaCordovaPlugin"
+  },
   "cordova": {
     "id": "com.appmetrica.cordova.plugins.appmetrica",
     "platforms": [
