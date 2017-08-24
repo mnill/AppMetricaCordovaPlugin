@@ -43,10 +43,10 @@ public class AppMetricaPlugin extends CordovaPlugin {
                     public void run() {
                         YandexMetrica.activate(cordova.getActivity().getApplicationContext(), devKey);
                         YandexMetrica.enableActivityAutoTracking(cordova.getActivity().getApplication());
+                        callbackContext.success();
                     }
                 };
                 this.cordova.getActivity().runOnUiThread(runnable);
-                callbackContext.success();
             } else {
                 callbackContext.error("Wrong arguments");
             }
