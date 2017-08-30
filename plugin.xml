@@ -5,6 +5,7 @@
     version="1.0.1">
     <name>AppMetrica</name>
     <description>AppMetrica cordova plugin</description>
+    <repo>https://github.com/mnill/AppMetricaCordovaPlugin.git</repo>
     <license>Apache 2.0</license>
     <keywords>cordova</keywords>
     <engines>
